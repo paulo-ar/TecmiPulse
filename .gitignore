@@ -1,0 +1,6 @@
+/.env.local
+/.next
+/dev.err.log
+/dev.out.log
+/node_modules
+/promt.txt
