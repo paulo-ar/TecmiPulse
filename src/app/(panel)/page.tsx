@@ -246,37 +246,41 @@ export default function DashboardPage() {
               </p>
               <p className="mt-3 text-2xl font-semibold tracking-tight text-zinc-50">{selectedDateRecords.length}</p>
             </button>
-            <div className="rounded-lg border border-amber-800 bg-amber-950/50 p-6">
-              <p className="text-xs font-medium uppercase tracking-wider text-amber-400">Aviso</p>
-              <p className="mt-3 text-sm font-normal text-amber-400">Cierre automatico programado a las 22:30 hrs</p>
+            <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-6">
+              <h2 className="text-xs font-medium uppercase tracking-wider text-zinc-400">Control Manual</h2>
+              {isSelectedToday ? (
+                <>
+                  <form onSubmit={handleManualOpen} className="mt-4 flex flex-col gap-3">
+                    <input
+                      value={manualMatricula}
+                      onChange={(event) => setManualMatricula(event.target.value)}
+                      placeholder="Matricula"
+                      className="w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 py-2 font-mono text-zinc-50 focus:border-green-600 focus:outline-none focus:ring-1"
+                    />
+                    <button
+                      type="submit"
+                      className="rounded-md bg-green-700 px-3 py-2 text-sm font-normal text-white transition-colors hover:bg-green-600"
+                    >
+                      Abrir Registro Manual
+                    </button>
+                  </form>
+                  {message ? <p className="mt-3 text-xs font-medium text-zinc-400">{message}</p> : null}
+                </>
+              ) : (
+                <p className="mt-3 text-sm font-normal text-zinc-600">Disponible solo para la fecha actual.</p>
+              )}
             </div>
           </section>
-
-          {isSelectedToday ? (
-            <section className="rounded-lg border border-zinc-800 bg-zinc-900 p-6">
-              <h2 className="text-lg font-medium text-zinc-50">Control Manual</h2>
-              <form onSubmit={handleManualOpen} className="mt-4 flex flex-col gap-4 md:flex-row">
-                <input
-                  value={manualMatricula}
-                  onChange={(event) => setManualMatricula(event.target.value)}
-                  placeholder="Matricula"
-                  className="w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 py-2 font-mono text-zinc-50 focus:border-green-600 focus:outline-none focus:ring-1 md:max-w-xs"
-                />
-                <button
-                  type="submit"
-                  className="rounded-md bg-green-700 px-3 py-2 text-sm font-normal text-white transition-colors hover:bg-green-600"
-                >
-                  Abrir Registro Manual
-                </button>
-              </form>
-              {message ? <p className="mt-3 text-xs font-medium text-zinc-400">{message}</p> : null}
-            </section>
-          ) : null}
 
           <TimelineChart registros={selectedDateRecords} />
         </div>
 
         <aside className="space-y-4">
+          <section className="rounded-lg border border-amber-800 bg-amber-950/50 p-6">
+            <p className="text-xs font-medium uppercase tracking-wider text-amber-400">Aviso</p>
+            <p className="mt-3 text-sm font-normal text-amber-400">Cierre automatico programado a las 22:30 hrs</p>
+          </section>
+
           <section className="rounded-lg border border-zinc-800 bg-zinc-900 p-6">
             <div className="flex items-start justify-between gap-4">
               <div>
