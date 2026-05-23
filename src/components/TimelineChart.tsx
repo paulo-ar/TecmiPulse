@@ -5,6 +5,7 @@ import {
   ResponsiveContainer,
   Scatter,
   ScatterChart,
+  Cell,
   Tooltip,
   XAxis,
   YAxis
@@ -23,6 +24,7 @@ interface TimelinePoint {
   matricula: string;
   nombre: string;
   hora: string;
+  color: string;
 }
 
 function toHourDecimal(value: string) {
@@ -42,7 +44,8 @@ function buildPoints(registros: RegistroAccesoConUsuario[]) {
       tipo: 'Entrada',
       matricula: registro.matricula,
       nombre,
-      hora: formatTime(registro.hora_entrada)
+      hora: formatTime(registro.hora_entrada),
+      color: '#22c55e'
     });
 
     if (registro.hora_salida) {
@@ -52,7 +55,8 @@ function buildPoints(registros: RegistroAccesoConUsuario[]) {
         tipo: 'Salida',
         matricula: registro.matricula,
         nombre,
-        hora: formatTime(registro.hora_salida)
+        hora: formatTime(registro.hora_salida),
+        color: '#ef4444'
       });
     }
   });
@@ -100,7 +104,11 @@ export default function TimelineChart({ registros }: TimelineChartProps) {
                 );
               }}
             />
-            <Scatter data={points} fill="#22c55e" />
+            <Scatter data={points}>
+              {points.map((point, index) => (
+                <Cell key={`${point.matricula}-${point.tipo}-${index}`} fill={point.color} />
+              ))}
+            </Scatter>
           </ScatterChart>
         </ResponsiveContainer>
       </div>

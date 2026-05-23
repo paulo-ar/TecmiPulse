@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { cn, docsCompleted, formatTime, fullName } from '@/lib/utils';
+import { cn, docsCompleted, formatDate, formatTime, fullName } from '@/lib/utils';
 import type { RegistroAcceso, UsuarioGimnasio } from '@/types/database';
 
 interface UserOverlayProps {
@@ -73,6 +73,7 @@ export default function UserOverlay({ user, onClose }: UserOverlayProps) {
           <table className="w-full">
             <thead className="border-b border-zinc-800 bg-zinc-900 text-xs uppercase tracking-wider text-zinc-400">
               <tr>
+                <th className="px-4 py-3 text-left font-medium">Fecha</th>
                 <th className="px-4 py-3 text-left font-medium">Entrada</th>
                 <th className="px-4 py-3 text-left font-medium">Salida</th>
                 <th className="px-4 py-3 text-left font-medium">Estatus</th>
@@ -81,6 +82,7 @@ export default function UserOverlay({ user, onClose }: UserOverlayProps) {
             <tbody>
               {history.map((registro) => (
                 <tr key={registro.id} className="text-sm font-normal text-zinc-300 transition-colors hover:bg-zinc-800/50">
+                  <td className="px-4 py-3">{formatDate(registro.hora_entrada)}</td>
                   <td className="px-4 py-3">{formatTime(registro.hora_entrada)}</td>
                   <td className="px-4 py-3">{formatTime(registro.hora_salida)}</td>
                   <td className="px-4 py-3">
@@ -101,7 +103,7 @@ export default function UserOverlay({ user, onClose }: UserOverlayProps) {
               ))}
               {history.length === 0 ? (
                 <tr>
-                  <td colSpan={3} className="px-4 py-6 text-center text-sm font-normal text-zinc-600">
+                  <td colSpan={4} className="px-4 py-6 text-center text-sm font-normal text-zinc-600">
                     Sin historial registrado.
                   </td>
                 </tr>
