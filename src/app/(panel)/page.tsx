@@ -230,8 +230,10 @@ export default function DashboardPage() {
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="space-y-6">
           <section className="grid gap-4 md:grid-cols-3">
-            <div className="rounded-lg border border-zinc-800 bg-zinc-900 p-6">
-              <p className="text-xs font-medium uppercase tracking-wider text-zinc-400">Usuarios Actuales en Gimnasio</p>
+            <div className="flex h-full flex-col justify-center rounded-lg border border-zinc-800 bg-zinc-900 p-6">
+              <p className="text-xs font-medium uppercase tracking-wider text-zinc-400">
+                Usuarios Actuales en Gimnasio
+              </p>
               <p className="mt-3 text-2xl font-semibold tracking-tight text-zinc-50">
                 {isSelectedToday ? activeRecords.length : 0}
               </p>
